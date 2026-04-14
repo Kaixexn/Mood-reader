@@ -13,8 +13,21 @@ const PRESETS = [
 const GEMINI_API_KEY = 'AIzaSyA0c_cnzPRJn0303KtbctwafYXp6ALGMK4';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
 
+// Different writing styles to rotate through so every response feels different
+const STYLES = [
+  'like a warm older sibling who has been through hard times themselves',
+  'like a best friend texting you at midnight who genuinely gets it',
+  'like a gentle poet who finds beauty even in difficult emotions',
+  'like a calm, grounded person who just wants you to breathe and feel seen',
+  'like someone who has felt exactly this color before and wants you to know you are not alone',
+  'like a caring person who skips the advice and just sits with you in the feeling',
+  'like a journal entry written for you, soft and honest',
+  'like a friend who always knows exactly what to say without trying too hard',
+];
+
 let currentColor = '#4ECDC4';
 let currentResult = null;
+let styleIndex = Math.floor(Math.random() * STYLES.length);
 let history = [];
 try { history = JSON.parse(localStorage.getItem('moodHistory') || '[]'); } catch {}
 
@@ -72,13 +85,25 @@ async function getAIMood(hex, notes) {
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
 
-  const prompt = `Someone picked the color ${hex} (R:${r} G:${g} B:${b}) to describe how they are feeling right now.${notes ? ` They also wrote: "${notes}"` : ''}
+  // Rotate style on every call so responses never feel copy-pasted
+  const style = STYLES[styleIndex % STYLES.length];
+  styleIndex++;
 
-Think about what emotions this color carries — its warmth, coolness, brightness, or heaviness — and write a response that feels personal and human.
+  // Time of day adds natural context variety
+  const hour = new Date().getHours();
+  const timeOfDay = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : hour < 21 ? 'evening' : 'night';
 
-Reply in exactly this format:
-MOOD: <1-3 word mood name, be specific and poetic, e.g. "quietly overwhelmed" or "bursting with hope">
-NOTE: <3-5 sentences of genuine heartfelt warmth. Speak directly to them. Acknowledge what they might be feeling, validate it fully, and end with something encouraging. Write like a close friend who truly sees them — not a therapist, not a motivational poster, just a real human who cares.>`;
+  const prompt = `It is ${timeOfDay}. Someone opened a mood tracker and picked the color ${hex} (R:${r}, G:${g}, B:${b}) to represent how they feel right now.${notes ? ` They added: "${notes}"` : ' They did not add any notes.'}
+
+Write your response ${style}.
+
+The color ${hex} — think carefully about its emotional weight. Is it fiery, cold, murky, bright, heavy, soft? Let that guide the mood name and the tone of your note.
+
+Do NOT recycle phrases like "it's okay to feel this way", "you are not alone", "take a deep breath", or "be kind to yourself". Say something FRESH and specific to this color and this moment.
+
+Reply in exactly this format and nothing else:
+MOOD: <1-3 word mood name — poetic and specific, not generic>
+NOTE: <4-5 sentences, warm and personal, no clichés>`;
 
   try {
     const res = await fetch(GEMINI_URL, {
@@ -87,17 +112,15 @@ NOTE: <3-5 sentences of genuine heartfelt warmth. Speak directly to them. Acknow
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
-          maxOutputTokens: 350,
-          temperature: 0.9,
-          topP: 0.95,
-          topK: 40
+          maxOutputTokens: 400,
+          temperature: 1.8,   // max creative variance
+          topP: 1.0,
+          topK: 64
         }
       })
     });
 
     const data = await res.json();
-
-    // Guard against unexpected response shape
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
     if (!text) throw new Error('Empty response');
 
@@ -111,9 +134,15 @@ NOTE: <3-5 sentences of genuine heartfelt warmth. Speak directly to them. Acknow
 
   } catch (err) {
     console.warn('Gemini error:', err);
+    // Rotate fallbacks too so even errors feel different
+    const fallbacks = [
+      "That color you picked — it says a lot even without words. Sit with it for a second. Whatever today has thrown at you, you are still here, still feeling, still moving.",
+      "Something in you chose that color for a reason, and that reason is valid. You don't have to explain it to anyone. Just let yourself feel it fully.",
+      "Colors don't lie — and whatever this one means to you right now, that feeling deserves space. Give yourself permission to just be where you are today.",
+    ];
     return {
       mood: 'Reflective',
-      note: "Whatever you're carrying right now, you don't have to carry it alone. Take a slow breath — you're doing better than you think, and it's okay to just feel what you feel today."
+      note: fallbacks[styleIndex % fallbacks.length]
     };
   }
 }
@@ -207,7 +236,7 @@ function showToast(msg) {
   setTimeout(() => t.remove(), 2500);
 }
 
-// ── XSS safety helper ─────────────────────────────────────
+// ── XSS safety ────────────────────────────────────────────
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;')
