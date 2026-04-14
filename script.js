@@ -10,8 +10,8 @@ const PRESETS = [
   { hex: '#888780', label: 'Gray' },
 ];
 
-const GEMINI_API_KEY = 'AIzaSyA0c_cnzPRJn0303KtbctwafYXp6ALGMK4';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_API_KEY = 'AIzaSyCOHDCzsVxeAZ3m-nlXy9iaqvyVvf7e7V0';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${AIzaSyCOHDCzsVxeAZ3m-nlXy9iaqvyVvf7e7V0}`;
 
 // Different writing styles to rotate through so every response feels different
 const STYLES = [
