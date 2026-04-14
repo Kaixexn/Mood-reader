@@ -12,16 +12,89 @@ body {
     overflow-x: hidden;
 }
 
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid #eee;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #9b59ff;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #9b59ff, #8e44ad);
+    z-index: 1001;
+    transition: width 0.1s ease;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 5%;
+    padding: 0 5%;
 }
 
-/* Color Picker Section */
-.color-section {
-    text-align: center;
-    margin-bottom: 4rem;
+section {
+    min-height: 100vh;
+    padding: 140px 0 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+section:nth-child(1) { animation-delay: 0.1s; }
+section:nth-child(2) { animation-delay: 0.2s; }
+section:nth-child(3) { animation-delay: 0.3s; }
+section:nth-child(4) { animation-delay: 0.4s; }
+section:nth-child(5) { animation-delay: 0.5s; }
+
+.in-view {
+    animation-play-state: running !important;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h1 {
@@ -35,14 +108,31 @@ h1 {
     background-clip: text;
 }
 
+h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.color-section {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
 #swatchCircle {
     width: 200px;
     height: 200px;
     border-radius: 50%;
     border: 8px solid #fff;
-    box-shadow: 
-        0 20px 60px rgba(0,0,0,0.15),
-        inset 0 2px 4px rgba(255,255,255,0.8);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.8);
     display: block;
     margin: 2rem auto;
     cursor: pointer;
@@ -51,9 +141,7 @@ h1 {
 
 #swatchCircle:hover {
     transform: scale(1.05);
-    box-shadow: 
-        0 30px 80px rgba(0,0,0,0.2),
-        inset 0 2px 4px rgba(255,255,255,0.9);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.9);
 }
 
 #hexVal {
@@ -88,7 +176,6 @@ h1 {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    position: relative;
 }
 
 .preset-dot:hover {
@@ -141,8 +228,6 @@ h1 {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin: 2rem auto;
     display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 #analyzeBtn:hover:not(:disabled) {
@@ -153,12 +238,11 @@ h1 {
 #analyzeBtn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
-    transform: none;
 }
 
-/* Result Area */
 #resultArea {
     min-height: 400px;
+    margin-top: 3rem;
 }
 
 .result-card {
@@ -204,14 +288,12 @@ h1 {
     border-radius: 50%;
     border: 6px solid #fff;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    flex-shrink: 0;
 }
 
 .mood-name span {
     font-size: clamp(2rem, 6vw, 4rem);
     font-weight: 300;
     color: #1a1a1a;
-    letter-spacing: -1px;
 }
 
 .note-text {
@@ -239,8 +321,6 @@ h1 {
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .save-btn {
@@ -265,7 +345,6 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* History Section */
 #historySection {
     margin-top: 6rem;
 }
@@ -282,7 +361,6 @@ h1 {
 .history-header span {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #1a1a1a;
 }
 
 .clear-all-btn {
@@ -317,7 +395,6 @@ h1 {
     box-shadow: 0 10px 40px rgba(0,0,0,0.08);
     border-left: 6px solid;
     transition: all 0.3s ease;
-    border-left-color: var(--history-color, #e5e5e5);
 }
 
 .history-item:hover {
@@ -331,7 +408,6 @@ h1 {
     border-radius: 50%;
     border: 4px solid #fff;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    flex-shrink: 0;
 }
 
 .history-info {
@@ -342,7 +418,6 @@ h1 {
 .h-mood {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #1a1a1a;
     margin-bottom: 0.5rem;
 }
 
@@ -366,7 +441,6 @@ h1 {
 .h-note {
     color: #444;
     line-height: 1.6;
-    font-size: 1rem;
 }
 
 .no-history {
@@ -379,7 +453,6 @@ h1 {
     font-size: 1.2rem;
 }
 
-/* Toast */
 .toast {
     position: fixed;
     bottom: 2rem;
@@ -393,25 +466,25 @@ h1 {
     transform: translateX(400px);
     animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     z-index: 2000;
-    backdrop-filter: blur(10px);
 }
 
 @keyframes slideInRight {
     to { transform: translateX(0); }
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-    .container {
+    .navbar {
         padding: 1rem 5%;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-menu {
+        gap: 1rem;
+    }
+    
+    section {
+        padding: 120px 5% 60px;
     }
     
     #swatchCircle {
@@ -431,7 +504,6 @@ h1 {
     
     .result-actions {
         flex-direction: column;
-        align-items: stretch;
     }
     
     .save-btn, .read-again-btn {
@@ -440,7 +512,6 @@ h1 {
     
     .history-item {
         flex-direction: column;
-        gap: 1rem;
         padding: 1.5rem;
     }
     
@@ -448,35 +519,15 @@ h1 {
         flex-direction: column;
         gap: 0.5rem;
     }
-    
-    #presets {
-        gap: 0.75rem;
-    }
-}
-
-@media (max-width: 480px) {
-    #swatchCircle {
-        width: 140px;
-        height: 140px;
-    }
-    
-    .preset-dot {
-        width: 40px;
-        height: 40px;
-    }
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }
