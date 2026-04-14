@@ -27,6 +27,7 @@ PRESETS.forEach(p => {
   dot.className = 'preset-dot';
   dot.style.background = p.hex;
   dot.dataset.hex = p.hex;
+  dot.dataset.label = p.label;
   dot.title = p.label;
   dot.onclick = () => setColor(p.hex);
   presetsEl.appendChild(dot);
@@ -63,14 +64,17 @@ async function getAIMood(hex, notes) {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
+  const randomSeed = Math.random().toString(36).substring(7);
 
-  const prompt = `Someone picked color ${hex} (R:${r} G:${g} B:${b}) to describe their mood.${notes ? ` Notes: "${notes}"` : ''}
+  const prompt = `Session ID: ${randomSeed} - Creative writing task!
 
-Respond with:
-MOOD: <1-3 word mood name>
+Someone picked color ${hex} (R:${r} G:${g} B:${b}) to describe their mood.${notes ? ` Notes: "${notes}"` : ''}
+
+Respond with UNIQUE response every time:
+MOOD: <1-3 word mood name - be creative, vary it!>
 NOTE: <3-5 sentences of warm, personal encouragement>
 
-Write like a caring friend who sees them.`;
+Write like a DIFFERENT caring friend each time. Vary tone, style, metaphors!`;
 
   try {
     const res = await fetch(
@@ -80,7 +84,12 @@ Write like a caring friend who sees them.`;
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 300 }
+          generationConfig: { 
+            maxOutputTokens: 350,
+            temperature: 0.95,
+            topP: 0.98,
+            topK: 50
+          }
         })
       }
     );
@@ -97,7 +106,7 @@ Write like a caring friend who sees them.`;
   } catch {
     return {
       mood: 'Reflective',
-      note: "Whatever you're carrying right now, you don't have to carry it alone. Take a breath. You're doing better than you think."
+      note: `Hey, whatever shade you're feeling today, it's valid. ${randomSeed.slice(0,3)} reminds me you're unique. Breathe. You've got this.`
     };
   }
 }
@@ -110,10 +119,17 @@ function showResult(result, hex) {
         ${result.mood}
       </div>
       <p class="note-text">${result.note}</p>
-      <button class="save-btn" id="saveBtn">Save this moment</button>
+      <div class="result-actions">
+        <button class="save-btn" id="saveBtn">💾 Save Moment</button>
+        <button class="read-again-btn" id="readAgainBtn">🎲 New Reading</button>
+      </div>
     </div>
   `;
+  
   document.getElementById('saveBtn').onclick = () => saveEntry(hex, result);
+  document.getElementById('readAgainBtn').onclick = () => {
+    analyzeBtn.click();
+  };
 }
 
 function saveEntry(hex, result) {
@@ -128,29 +144,49 @@ function saveEntry(hex, result) {
   };
 
   history.unshift(entry);
-  history = history.slice(0, 10);
+  history = history.slice(0, 15);
   try { localStorage.setItem('moodHistory', JSON.stringify(history)); } catch {}
   renderHistory();
-  showToast('Saved');
+  showToast('Saved to history! ✨');
 }
 
 function renderHistory() {
   const el = document.getElementById('historyList');
+  if (!el) return;
+  
   if (!history.length) {
-    el.innerHTML = '<p class="no-history">Your saved moods will show up here.</p>';
+    el.innerHTML = '<p class="no-history">Your saved moods will show up here. Save your first reading!</p>';
     return;
   }
-  el.innerHTML = history.slice(0, 5).map(h => `
-    <div class="history-item">
-      <div class="h-dot" style="background:${h.color}; margin-top:4px"></div>
-      <div>
-        <span class="h-mood">${h.mood}</span>
-        <span class="h-time">${h.date} · ${h.time}</span>
-        ${h.context ? `<p class="h-note" style="color:var(--color-text-tertiary);font-style:italic">"${h.context}"</p>` : ''}
-        <p class="h-note">${h.note.slice(0, 120)}${h.note.length > 120 ? '...' : ''}</p>
-      </div>
+  
+  el.innerHTML = `
+    <div class="history-header">
+      <h3>📜 Your Mood History (${history.length})</h3>
+      <button id="clearAllBtn" class="clear-all-btn">🗑️ Clear All</button>
     </div>
-  `).join('');
+    ${history.slice(0, 6).map(h => `
+      <div class="history-item">
+        <div class="h-dot" style="background:${h.color}"></div>
+        <div class="history-info">
+          <div class="h-mood">${h.mood}</div>
+          <div class="h-date">${h.date} · ${h.time}</div>
+          ${h.context ? `<div class="h-context">"${h.context}"</div>` : ''}
+          <div class="h-note">${h.note.slice(0, 140)}${h.note.length > 140 ? '...' : ''}</div>
+        </div>
+      </div>
+    `).join('')}
+  `;
+  
+  document.getElementById('clearAllBtn')?.onclick = clearAllHistory;
+}
+
+function clearAllHistory() {
+  if (confirm('Clear entire mood history? This cannot be undone.')) {
+    history = [];
+    localStorage.removeItem('moodHistory');
+    renderHistory();
+    showToast('History cleared! 🧹');
+  }
 }
 
 function showToast(msg) {
@@ -158,7 +194,7 @@ function showToast(msg) {
   t.className = 'toast';
   t.textContent = msg;
   document.body.appendChild(t);
-  setTimeout(() => t.remove(), 2000);
+  setTimeout(() => t.remove(), 2800);
 }
 
 renderHistory();
