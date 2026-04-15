@@ -168,7 +168,6 @@ That is your greatest strength.`
 const history = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Add mobile viewport meta tag if not present
   if (!document.querySelector('meta[name="viewport"]')) {
     const viewport = document.createElement('meta');
     viewport.name = 'viewport';
@@ -176,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(viewport);
   }
 
-  // Apply mobile-responsive styles
   const style = document.createElement('style');
   style.textContent = `
     @media (max-width: 768px) {
@@ -264,14 +262,12 @@ document.addEventListener('DOMContentLoaded', () => {
         border-bottom: none !important;
       }
       
-      /* Prevent horizontal scroll */
       * {
         max-width: 100% !important;
         box-sizing: border-box !important;
       }
     }
     
-    /* Improve touch targets */
     @media (hover: none) and (pointer: coarse) {
       .envelope-preset {
         min-height: 60px !important;
@@ -312,7 +308,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resultArea.style.opacity = '1';
         resultArea.style.transform = 'translateY(0)';
         
-        // Better mobile scroll behavior
         setTimeout(() => {
           resultArea.scrollIntoView({ 
             behavior: 'smooth', 
