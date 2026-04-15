@@ -168,6 +168,119 @@ That is your greatest strength.`
 const history = [];
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Add mobile viewport meta tag if not present
+  if (!document.querySelector('meta[name="viewport"]')) {
+    const viewport = document.createElement('meta');
+    viewport.name = 'viewport';
+    viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+    document.head.appendChild(viewport);
+  }
+
+  // Apply mobile-responsive styles
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 768px) {
+      body {
+        padding: 8px !important;
+        margin: 0 !important;
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+      }
+      
+      .envelope-row {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin-bottom: 16px !important;
+      }
+      
+      .envelope-preset {
+        flex: 1 !important;
+        min-height: 56px !important;
+        padding: 12px !important;
+        font-size: 16px !important;
+        border-radius: 12px !important;
+        margin: 0 !important;
+        min-width: 0 !important;
+        touch-action: manipulation !important;
+      }
+      
+      #resultArea {
+        margin: 24px 0 !important;
+        padding: 0 8px !important;
+      }
+      
+      .letter-card {
+        padding: 24px 20px !important;
+        border-radius: 20px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      
+      .letter-greeting {
+        font-size: 20px !important;
+        line-height: 1.3 !important;
+        margin: 0 0 16px 0 !important;
+      }
+      
+      .letter-body {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        margin: 0 0 16px 0 !important;
+        hyphens: auto !important;
+        word-break: break-word !important;
+      }
+      
+      .letter-sign {
+        font-size: 14px !important;
+        opacity: 0.8 !important;
+        margin: 0 !important;
+      }
+      
+      #historyList {
+        padding: 16px !important;
+        margin: 24px -8px !important;
+        background: rgba(0,0,0,0.03) !important;
+        border-radius: 16px !important;
+      }
+      
+      #historyList p {
+        margin: 0 0 12px 0 !important;
+        font-size: 14px !important;
+      }
+      
+      #historyList ul {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      
+      #historyList li {
+        font-size: 14px !important;
+        padding: 8px 0 !important;
+        border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+      }
+      
+      #historyList li:last-child {
+        border-bottom: none !important;
+      }
+      
+      /* Prevent horizontal scroll */
+      * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+    }
+    
+    /* Improve touch targets */
+    @media (hover: none) and (pointer: coarse) {
+      .envelope-preset {
+        min-height: 60px !important;
+        padding: 16px !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
   document.querySelectorAll('.envelope-preset').forEach(envelope => {
     envelope.addEventListener('click', () => {
       const colorGroup = envelope.closest('.envelope-row');
@@ -187,14 +300,26 @@ document.addEventListener('DOMContentLoaded', () => {
         resultArea.innerHTML = `
           <div class="letter-card">
             <p class="letter-greeting">${letter.greeting}</p>
-            <p class="letter-body">${letter.body.replace(/\n\n/g, '</p><p class="letter-body">')}</p>
+            <div class="letter-body-container">
+              ${letter.body.split('\n\n').map(paragraph => 
+                `<p class="letter-body">${paragraph}</p>`
+              ).join('')}
+            </div>
             <p class="letter-sign">— with care, Mood Notes ✉️</p>
           </div>
         `;
 
         resultArea.style.opacity = '1';
         resultArea.style.transform = 'translateY(0)';
-        resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Better mobile scroll behavior
+        setTimeout(() => {
+          resultArea.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center',
+            inline: 'nearest'
+          });
+        }, 100);
       }, 200);
 
       const colorNames = {
@@ -213,14 +338,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const historyList = document.getElementById('historyList');
       if (historyList) {
-        historyList.innerHTML = history.length
-          ? `<p style="margin-top: 2rem; opacity: 0.6; font-size: 0.85rem;">Your recent envelopes:</p>
-             <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">
-               ${history.slice(0, 5).map(h =>
-                 `<li style="margin-bottom: 0.4rem;">✉️ ${h.color} — Note ${h.note} <span style="opacity:0.5;">${h.time}</span></li>`
-               ).join('')}
-             </ul>`
-          : '';
+        const historyHTML = history.length ? `
+          <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 14px; font-weight: 500;">Your recent envelopes:</p>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            ${history.slice(0, 5).map(h => 
+              `<li style="margin: 0; padding: 8px 0; opacity: 0.8; font-size: 14px; border-bottom: 1px solid rgba(0,0,0,0.08);">
+                ✉️ ${h.color} — Note ${h.note} 
+                <span style="opacity: 0.6; font-size: 13px;">${h.time}</span>
+              </li>`
+            ).join('')}
+          </ul>
+        ` : '';
+        
+        historyList.innerHTML = historyHTML;
       }
     });
   });
