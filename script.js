@@ -348,5 +348,12 @@ document.addEventListener('DOMContentLoaded', () => {
         historyList.innerHTML = historyHTML;
       }
     });
+
+    const navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        document.querySelector('.nav-menu').classList.toggle('active');
+      });
+    }
   });
 });
