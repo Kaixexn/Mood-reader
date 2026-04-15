@@ -17,16 +17,15 @@ h1, h2, h3, h4 {
     letter-spacing: -0.02em;
 }
 
-/* ── NAVBAR FIX: dark bg so white text is visible + flexbox layout ── */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     padding: 1.2rem 2rem;
-    display: flex;                          /* was missing entirely */
-    align-items: center;                    /* was missing entirely */
-    justify-content: space-between;        /* was missing entirely */
-    background: rgba(10, 10, 10, 0.92);   /* was rgba(255,255,255,0.95) — white on white! */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10, 10, 10, 0.92);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     z-index: 1000;
@@ -59,9 +58,8 @@ h1, h2, h3, h4 {
     color: #ab89b6;
 }
 
-/* ── SECTION FIX: remove min-height: 100vh that caused huge gaps ── */
 section {
-    padding: 120px 2rem 5rem;              /* was 140px top + no min-height below */
+    padding: 120px 2rem 5rem;
     max-width: 1000px;
     margin: 0 auto;
     opacity: 0;
@@ -74,7 +72,6 @@ section.in-view {
     transform: translateY(0);
 }
 
-/* keep the last section from feeling cramped */
 #about {
     padding-bottom: 8rem;
 }
