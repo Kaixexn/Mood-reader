@@ -63,39 +63,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
     </script>
-    <title>Mood Notes | Your Inner Spectrum</title>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">Mood Notes</div>
-        <ul class="nav-menu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#introduction">Philosophy</a></li>
-            <li><a href="#mood-check">Check Mood</a></li>
-            <li><a href="#about">Who Made This</a></li>
-        </ul>
-    </nav>
+<nav class="navbar">
+  <div class="nav-brand">
+    <span class="logo">Mood Notes</span>
+    <button class="nav-toggle" aria-label="toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#check">Check Mood</a></li>
+    <li><a href="#who">Who Made This</a></li>
+  </ul>
+</nav>
 
     <section id="home">
         <h1>Mood Notes</h1>
         <p>A quiet corner of the internet designed for reflection. Here, we invite you to set aside the noise of the world, lean into your intuition, and discover what your favorite hues are trying to tell you today.</p>
     </section>
 
-    <section id="introduction">
+    <section id="philosophy">
         <h2>A Language Beyond Words</h2>
         <p>Colors speak what words cannot. This is your safe, private space to express the complexity of your mood through the simple power of color. We believe that sometimes a shade of deep blue or a flicker of warm orange can capture a feeling more accurately than a thousand sentences ever could.</p>
         <p>In this gentle corner of the digital world, we aim to translate your inner light into a visual symphony. Whether you are seeking clarity, peace, or just a moment of quiet acknowledgment, let your palette set the intention. Breathe in, trust your instinct, and let the colors lead the way home.</p>
         <p>Simple tools. Personal insights. Healing moments.</p>
     </section>
 
-    <section id="mood-check">
+    <section id="check">
     <h2>Check Your Mood</h2>
     <p>Take a deep breath and look at the spectrum below. Don't overthink—simply reach for the color that feels like "you" in this exact second.</p>
   
     <div style="text-align: center; margin: 4rem 0;">
         <h3 style="margin-bottom: 2.5rem;">✉️ Choose Your Color Envelope</h3>
         
-        <!-- Blue Envelopes -->
         <div class="color-group">
             <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟦 Blue Mood (5 Notes)</h4>
             <div class="envelope-row" data-color="#0000FF">
@@ -107,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
 
-        <!-- Red Envelopes -->
         <div class="color-group">
             <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🔴 Red Mood (5 Notes)</h4>
             <div class="envelope-row" data-color="#FF0000">
@@ -119,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
 
-        <!-- Green Envelopes -->
         <div class="color-group">
             <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟢 Green Mood (5 Notes)</h4>
             <div class="envelope-row" data-color="#00FF00">
@@ -131,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
 
-        <!-- Yellow Envelopes -->
         <div class="color-group">
             <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟡 Yellow Mood (5 Notes)</h4>
             <div class="envelope-row" data-color="#FFFF00">
@@ -143,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
 
-        <!-- Purple Envelopes -->
         <div class="color-group">
             <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟣 Purple Mood (5 Notes)</h4>
             <div class="envelope-row" data-color="#800080">
@@ -160,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     </section>
 
-    <section id="about">
+    <section id="who">
         <h2>The Heart Behind the Project</h2>
         <p>Handcrafted with care by Kaixexn.</p>
         <p>This project was born from a desire to help you reconnect with your true self. In a world that moves so fast, it is easy to lose track of how we actually feel. My hope is that by choosing your selected colors—or simply exploring the ones you love—you can find a small spark of understanding and a gentle reminder that your emotions are beautiful, valid, and uniquely yours.</p>
