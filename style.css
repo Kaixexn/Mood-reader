@@ -474,11 +474,26 @@ section.in-view #resultArea {
 
 @media (max-width: 768px) {
     .navbar {
-        padding: 1rem 1.5rem;
+        padding: 1rem;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 60px;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+        flex-shrink: 0;
     }
 
     .nav-menu {
-        gap: 1.5rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .nav-menu a {
+        font-size: 0.85rem;
+        padding: 0.3rem 0;
     }
 
     section {
@@ -524,15 +539,26 @@ section.in-view #resultArea {
 
 @media (max-width: 480px) {
     .navbar {
-        padding: 0.9rem 1.2rem;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.8rem 1rem;
     }
 
-    .logo {
-        font-size: 1.4rem;
+    .nav-menu {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-menu a {
+        font-size: 0.8rem;
     }
 
     section {
-        padding-top: 110px;
+        padding-top: 140px;
         padding-left: 1rem;
         padding-right: 1rem;
     }
