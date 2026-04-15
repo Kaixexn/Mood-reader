@@ -17,16 +17,20 @@ h1, h2, h3, h4 {
     letter-spacing: -0.02em;
 }
 
+/* ── NAVBAR FIX: dark bg so white text is visible + flexbox layout ── */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 1.5rem 2rem;
-    background: rgba(255, 255, 255, 0.95);
+    padding: 1.2rem 2rem;
+    display: flex;                          /* was missing entirely */
+    align-items: center;                    /* was missing entirely */
+    justify-content: space-between;        /* was missing entirely */
+    background: rgba(10, 10, 10, 0.92);   /* was rgba(255,255,255,0.95) — white on white! */
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
 }
 
 .logo {
@@ -34,22 +38,20 @@ h1, h2, h3, h4 {
     font-weight: 400;
     letter-spacing: -0.5px;
     color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .nav-menu {
     display: flex;
     list-style: none;
     gap: 2.5rem;
-    margin-left: auto;
 }
 
 .nav-menu a {
-    color: white;
+    color: rgba(255, 255, 255, 0.75);
     text-decoration: none;
     font-weight: 400;
     font-size: 0.95rem;
-    transition: color 0.3s ease;
+    transition: color 0.25s ease;
     letter-spacing: 0.3px;
 }
 
@@ -57,9 +59,9 @@ h1, h2, h3, h4 {
     color: #ab89b6;
 }
 
+/* ── SECTION FIX: remove min-height: 100vh that caused huge gaps ── */
 section {
-    min-height: 100vh;
-    padding: 140px 2rem 6rem;
+    padding: 120px 2rem 5rem;              /* was 140px top + no min-height below */
     max-width: 1000px;
     margin: 0 auto;
     opacity: 0;
@@ -70,6 +72,11 @@ section {
 section.in-view {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* keep the last section from feeling cramped */
+#about {
+    padding-bottom: 8rem;
 }
 
 h1 {
@@ -337,23 +344,19 @@ p {
     box-shadow: 0 20px 60px rgba(0,0,0,0.1);
 }
 
-#about {
-    padding-bottom: 8rem;
-}
-
 @media (max-width: 768px) {
     .navbar {
-        padding: 1.2rem 1.5rem;
-        flex-direction: column;
-        gap: 1.5rem;
+        padding: 1rem 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
     }
 
     .nav-menu {
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
     section {
-        padding: 120px 1.5rem 4rem;
+        padding: 100px 1.5rem 3rem;
     }
 
     .envelope-row {
