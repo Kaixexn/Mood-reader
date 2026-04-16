@@ -162,8 +162,43 @@ Purple people are rare. You are rare.`
 
 That is your greatest strength.`
     }
+  },
+
+  "#FFC0CB": {
+    1: {
+      greeting: "A note for you, in Pink",
+      body: `You are the soft glow of a sunrise — warming, hopeful, and a gentle reminder that every beginning is beautiful. Pink is the color of the self-healer, the one who chooses kindness even when the world is loud. 
+
+Don't forget to be your own best friend today. You deserve the same grace you give to others.`
+    },
+    2: {
+      greeting: "A note for you, in Pink",
+      body: `You are the bloom of a wild flower — delicate yet incredibly resilient, finding your way to the light. Pink reflects a heart that is open and a spirit that is playful.
+
+It is okay to lower your guard. In this quiet moment, you are safe to simply be.`
+    },
+    3: {
+      greeting: "A note for you, in Pink",
+      body: `You are the comfort of a well-loved memory — familiar, sweet, and filled with a quiet strength. This shade is for the soul that nurtures, the one who knows that softness is not a weakness, but a superpower.
+
+Take a deep breath. Your vulnerability is where your true magic lives.`
+    },
+    4: {
+      greeting: "A note for you, in Pink",
+      body: `You are a spark of inner joy — like a flicker of light that refuses to go out. Pink is the color of transition, moving away from the grey and toward something lighter and more peaceful.
+
+Whatever journey you are on, you are making progress. Even the smallest step counts.`
+    },
+    5: {
+      greeting: "A note for you, in Pink",
+      body: `You are the quiet compassion in a crowded room — the one who notices the small things and cares deeply. This color suggests your heart is seeking a moment of rest and reconnection.
+
+Rest is not a luxury; it is a necessity. Give yourself permission to pause and recharge today.`
+    }
   }
 };
+
+letters["#FF69B4"] = letters["#FFC0CB"];
 
 const history = [];
 
@@ -322,7 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "#FF0000": "Red",
         "#00FF00": "Green",
         "#FFFF00": "Yellow",
-        "#800080": "Purple"
+        "#800080": "Purple",
+        "#FFC0CB": "Pink",
+        "#FF69B4": "Pink"
       };
 
       history.unshift({
