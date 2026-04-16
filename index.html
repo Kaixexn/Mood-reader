@@ -65,106 +65,122 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
 </head>
 <body>
-<nav class="navbar">
-  <div class="nav-brand">
-    <span class="logo">Mood Notes</span>
-    <button class="nav-toggle" aria-label="toggle navigation">
-      <span class="hamburger"></span>
-    </button>
-  </div>
-  <ul class="nav-menu">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#philosophy">Philosophy</a></li>
-    <li><a href="#check">Check Mood</a></li>
-    <li><a href="#who">Who Made This</a></li>
-  </ul>
-</nav>
+    <main>
+        <section id="home">
+            <h1>Mood Notes</h1>
+            <p>A quiet corner of the internet designed for reflection. Here, we invite you to set aside the noise of the world, lean into your intuition, and discover what your favorite hues are trying to tell you today.</p>
+        </section>
 
-    <section id="home">
-        <h1>Mood Notes</h1>
-        <p>A quiet corner of the internet designed for reflection. Here, we invite you to set aside the noise of the world, lean into your intuition, and discover what your favorite hues are trying to tell you today.</p>
-    </section>
+        <section id="philosophy">
+            <h2>A Language Beyond Words</h2>
+            <p>Colors speak what words cannot. This is your safe, private space to express the complexity of your mood through the simple power of color. We believe that sometimes a shade of deep blue or a flicker of warm orange can capture a feeling more accurately than a thousand sentences ever could.</p>
+            <p>In this gentle corner of the digital world, we aim to translate your inner light into a visual symphony. Whether you are seeking clarity, peace, or just a moment of quiet acknowledgment, let your palette set the intention. Breathe in, trust your instinct, and let the colors lead the way home.</p>
+            <p>Simple tools. Personal insights. Healing moments.</p>
+        </section>
 
-    <section id="philosophy">
-        <h2>A Language Beyond Words</h2>
-        <p>Colors speak what words cannot. This is your safe, private space to express the complexity of your mood through the simple power of color. We believe that sometimes a shade of deep blue or a flicker of warm orange can capture a feeling more accurately than a thousand sentences ever could.</p>
-        <p>In this gentle corner of the digital world, we aim to translate your inner light into a visual symphony. Whether you are seeking clarity, peace, or just a moment of quiet acknowledgment, let your palette set the intention. Breathe in, trust your instinct, and let the colors lead the way home.</p>
-        <p>Simple tools. Personal insights. Healing moments.</p>
-    </section>
+        <section id="check">
+        <h2>Check Your Mood</h2>
+        <p>Take a deep breath and look at the spectrum below. Don't overthink—simply reach for the color that feels like "you" in this exact second.</p>
+      
+        <div style="text-align: center; margin: 4rem 0;">
+            <h3 style="margin-bottom: 2.5rem;">✉️ Choose Your Color Envelope</h3>
+            
+            <div class="color-group">
+                <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟦 Blue Mood (5 Notes)</h4>
+                <div class="envelope-row" data-color="#0000FF">
+                    <div class="envelope-preset blue-1" data-note="1"></div>
+                    <div class="envelope-preset blue-2" data-note="2"></div>
+                    <div class="envelope-preset blue-3" data-note="3"></div>
+                    <div class="envelope-preset blue-4" data-note="4"></div>
+                    <div class="envelope-preset blue-5" data-note="5"></div>
+                </div>
+            </div>
 
-    <section id="check">
-    <h2>Check Your Mood</h2>
-    <p>Take a deep breath and look at the spectrum below. Don't overthink—simply reach for the color that feels like "you" in this exact second.</p>
-  
-    <div style="text-align: center; margin: 4rem 0;">
-        <h3 style="margin-bottom: 2.5rem;">✉️ Choose Your Color Envelope</h3>
-        
-        <div class="color-group">
-            <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟦 Blue Mood (5 Notes)</h4>
-            <div class="envelope-row" data-color="#0000FF">
-                <div class="envelope-preset blue-1" data-note="1"></div>
-                <div class="envelope-preset blue-2" data-note="2"></div>
-                <div class="envelope-preset blue-3" data-note="3"></div>
-                <div class="envelope-preset blue-4" data-note="4"></div>
-                <div class="envelope-preset blue-5" data-note="5"></div>
+            <div class="color-group">
+                <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🔴 Red Mood (5 Notes)</h4>
+                <div class="envelope-row" data-color="#FF0000">
+                    <div class="envelope-preset red-1" data-note="1"></div>
+                    <div class="envelope-preset red-2" data-note="2"></div>
+                    <div class="envelope-preset red-3" data-note="3"></div>
+                    <div class="envelope-preset red-4" data-note="4"></div>
+                    <div class="envelope-preset red-5" data-note="5"></div>
+                </div>
+            </div>
+
+            <div class="color-group">
+                <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟢 Green Mood (5 Notes)</h4>
+                <div class="envelope-row" data-color="#00FF00">
+                    <div class="envelope-preset green-1" data-note="1"></div>
+                    <div class="envelope-preset green-2" data-note="2"></div>
+                    <div class="envelope-preset green-3" data-note="3"></div>
+                    <div class="envelope-preset green-4" data-note="4"></div>
+                    <div class="envelope-preset green-5" data-note="5"></div>
+                </div>
+            </div>
+
+            <div class="color-group">
+                <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟡 Yellow Mood (5 Notes)</h4>
+                <div class="envelope-row" data-color="#FFFF00">
+                    <div class="envelope-preset yellow-1" data-note="1"></div>
+                    <div class="envelope-preset yellow-2" data-note="2"></div>
+                    <div class="envelope-preset yellow-3" data-note="3"></div>
+                    <div class="envelope-preset yellow-4" data-note="4"></div>
+                    <div class="envelope-preset yellow-5" data-note="5"></div>
+                </div>
+            </div>
+
+            <div class="color-group">
+                <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟣 Purple Mood (5 Notes)</h4>
+                <div class="envelope-row" data-color="#800080">
+                    <div class="envelope-preset purple-1" data-note="1"></div>
+                    <div class="envelope-preset purple-2" data-note="2"></div>
+                    <div class="envelope-preset purple-3" data-note="3"></div>
+                    <div class="envelope-preset purple-4" data-note="4"></div>
+                    <div class="envelope-preset purple-5" data-note="5"></div>
+                </div>
+            </div>
+
+            <div class="color-group">
+                <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🌸 Pink Mood (5 Notes)</h4>
+                <div class="envelope-row" data-color="#FF69B4">
+                    <div class="envelope-preset pink-1" data-note="1"></div>
+                    <div class="envelope-preset pink-2" data-note="2"></div>
+                    <div class="envelope-preset pink-3" data-note="3"></div>
+                    <div class="envelope-preset pink-4" data-note="4"></div>
+                    <div class="envelope-preset pink-5" data-note="5"></div>
+                </div>
             </div>
         </div>
 
-        <div class="color-group">
-            <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🔴 Red Mood (5 Notes)</h4>
-            <div class="envelope-row" data-color="#FF0000">
-                <div class="envelope-preset red-1" data-note="1"></div>
-                <div class="envelope-preset red-2" data-note="2"></div>
-                <div class="envelope-preset red-3" data-note="3"></div>
-                <div class="envelope-preset red-4" data-note="4"></div>
-                <div class="envelope-preset red-5" data-note="5"></div>
-            </div>
-        </div>
+        <div id="resultArea" style="margin-top: 3rem; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease;"></div>
+        </section>
 
-        <div class="color-group">
-            <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟢 Green Mood (5 Notes)</h4>
-            <div class="envelope-row" data-color="#00FF00">
-                <div class="envelope-preset green-1" data-note="1"></div>
-                <div class="envelope-preset green-2" data-note="2"></div>
-                <div class="envelope-preset green-3" data-note="3"></div>
-                <div class="envelope-preset green-4" data-note="4"></div>
-                <div class="envelope-preset green-5" data-note="5"></div>
-            </div>
-        </div>
+        <section id="who">
+            <h2>The Heart Behind the Project</h2>
+            <p>Handcrafted with care by Kaixexn.</p>
+            <p>This project was born from a desire to help you reconnect with your true self. In a world that moves so fast, it is easy to lose track of how we actually feel. My hope is that by choosing your selected colors—or simply exploring the ones you love—you can find a small spark of understanding and a gentle reminder that your emotions are beautiful, valid, and uniquely yours.</p>
+            <div id="historyList"></div>
+        </section>
+    </main>
 
-        <div class="color-group">
-            <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟡 Yellow Mood (5 Notes)</h4>
-            <div class="envelope-row" data-color="#FFFF00">
-                <div class="envelope-preset yellow-1" data-note="1"></div>
-                <div class="envelope-preset yellow-2" data-note="2"></div>
-                <div class="envelope-preset yellow-3" data-note="3"></div>
-                <div class="envelope-preset yellow-4" data-note="4"></div>
-                <div class="envelope-preset yellow-5" data-note="5"></div>
-            </div>
-        </div>
-
-        <div class="color-group">
-            <h4 style="margin-bottom: 1.5rem; opacity: 0.8;">🟣 Purple Mood (5 Notes)</h4>
-            <div class="envelope-row" data-color="#800080">
-                <div class="envelope-preset purple-1" data-note="1"></div>
-                <div class="envelope-preset purple-2" data-note="2"></div>
-                <div class="envelope-preset purple-3" data-note="3"></div>
-                <div class="envelope-preset purple-4" data-note="4"></div>
-                <div class="envelope-preset purple-5" data-note="5"></div>
-            </div>
-        </div>
-    </div>
-    
-    <div id="resultArea" style="margin-top: 3rem; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease;"></div>
-
-    </section>
-
-    <section id="who">
-        <h2>The Heart Behind the Project</h2>
-        <p>Handcrafted with care by Kaixexn.</p>
-        <p>This project was born from a desire to help you reconnect with your true self. In a world that moves so fast, it is easy to lose track of how we actually feel. My hope is that by choosing your selected colors—or simply exploring the ones you love—you can find a small spark of understanding and a gentle reminder that your emotions are beautiful, valid, and uniquely yours.</p>
-        <div id="historyList"></div>
-    </section>
+    <nav class="bottom-nav">
+        <a href="#home" class="nav-item active" data-section="home">
+            <span class="nav-icon"></span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="#philosophy" class="nav-item" data-section="philosophy">
+            <span class="nav-icon"></span>
+            <span class="nav-label">Philosophy</span>
+        </a>
+        <a href="#check" class="nav-item" data-section="check">
+            <span class="nav-icon"></span>
+            <span class="nav-label">Check Mood</span>
+        </a>
+        <a href="#who" class="nav-item" data-section="who">
+            <span class="nav-icon"></span>
+            <span class="nav-label">About</span>
+        </a>
+    </nav>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -176,6 +192,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="preset-label">Mood Read</span>
                     </div>
                 `;
+            });
+
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = item.dataset.section;
+                    document.getElementById(section).scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                });
             });
         });
     </script>
